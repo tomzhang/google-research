@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Copyright 2020 The Google Research Authors.
+=======
+# Copyright 2019 The Google Research Authors.
+>>>>>>> EvaNet code and models.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,8 +26,11 @@ source ./bin/activate
 pip install tensorflow
 pip install -r evanet/requirements.txt
 
+<<<<<<< HEAD
 wget -P evanet/data/ https://storage.googleapis.com/gresearch/evanet/data/label_map.txt
 wget -P evanet/data/ https://storage.googleapis.com/gresearch/evanet/data/v_CricketShot_g04_c01_flow.npy
 wget -P evanet/data/ https://storage.googleapis.com/gresearch/evanet/data/v_CricketShot_g04_c01_rgb.npy
+=======
+>>>>>>> EvaNet code and models.
 
 python -m evanet.run_evanet

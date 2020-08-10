@@ -19,9 +19,12 @@ Then download the model weights and place them in data/checkpoints.
 
 To evalute the pre-trained EvaNet ensemble on a sample video:
 ```bash
+<<<<<<< HEAD
 wget -P evanet/data/ https://storage.googleapis.com/gresearch/evanet/data/label_map.txt
 wget -P evanet/data/ https://storage.googleapis.com/gresearch/evanet/data/v_CricketShot_g04_c01_flow.npy
 wget -P evanet/data/ https://storage.googleapis.com/gresearch/evanet/data/v_CricketShot_g04_c01_rgb.
+=======
+>>>>>>> EvaNet code and models.
 python -m evanet.run_evanet --checkpoints=rgb1.ckpt,rgb2.ckpt,flow1.ckpt,flow2.ckpt
 ```
 

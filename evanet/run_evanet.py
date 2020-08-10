@@ -1,5 +1,9 @@
 # coding=utf-8
+<<<<<<< HEAD
 # Copyright 2020 The Google Research Authors.
+=======
+# Copyright 2019 The Google Research Authors.
+>>>>>>> EvaNet code and models.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +31,11 @@ from absl import flags
 
 import numpy as np
 
+<<<<<<< HEAD
 import tensorflow.compat.v1 as tf  # tf
+=======
+import tensorflow as tf  # tf
+>>>>>>> EvaNet code and models.
 
 from evanet import model_dna
 

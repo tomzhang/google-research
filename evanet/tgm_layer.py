@@ -1,5 +1,9 @@
 # coding=utf-8
+<<<<<<< HEAD
 # Copyright 2020 The Google Research Authors.
+=======
+# Copyright 2019 The Google Research Authors.
+>>>>>>> EvaNet code and models.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,6 +31,7 @@ https://arxiv.org/abs/1811.10636
 """
 
 import numpy as np
+<<<<<<< HEAD
 import tensorflow.compat.v1 as tf
 from tensorflow.contrib import framework as contrib_framework
 from tensorflow.contrib import slim as contrib_slim
@@ -34,6 +39,15 @@ from tensorflow.contrib.slim import initializers as contrib_slim_initializers
 from tensorflow.contrib.slim import utils as contrib_slim_utils
 
 add_arg_scope = contrib_framework.add_arg_scope
+=======
+import tensorflow as tf
+import tensorflow.contrib.slim as slim
+from tensorflow.contrib.slim import initializers
+from tensorflow.contrib.slim import utils
+
+
+add_arg_scope = tf.contrib.framework.add_arg_scope
+>>>>>>> EvaNet code and models.
 
 
 def n_element_tuple(ary, int_or_tuple):
@@ -89,11 +103,19 @@ def get_filters(length, num, scope, init=1, dtype=tf.float32):
   """
   with tf.variable_scope(scope):
     # create slim variables for the center and std of distribution
+<<<<<<< HEAD
     center = contrib_slim.model_variable(
         'tgm-center',
         shape=[num],
         initializer=tf.initializers.random_normal(0, 0.5))
     gamma = contrib_slim.model_variable(
+=======
+    center = slim.model_variable(
+        'tgm-center',
+        shape=[num],
+        initializer=tf.initializers.random_normal(0, 0.5))
+    gamma = slim.model_variable(
+>>>>>>> EvaNet code and models.
         'tgm-gamma',
         shape=[num],
         initializer=tf.initializers.random_normal(0, init))
@@ -120,6 +142,7 @@ def get_filters(length, num, scope, init=1, dtype=tf.float32):
 
 
 @add_arg_scope
+<<<<<<< HEAD
 def tgm_3d_conv(
     inputs,
     num_outputs,
@@ -136,6 +159,23 @@ def tgm_3d_conv(
     outputs_collection=None,
     weights_initializer=contrib_slim_initializers.xavier_initializer(),
     dtype=tf.float32):
+=======
+def tgm_3d_conv(inputs,
+                num_outputs,
+                kernel_size,
+                num,
+                stride=1,
+                padding='SAME',
+                activation_fn=tf.nn.relu,
+                normalizer_fn=None,
+                normalizer_params=None,
+                trainable=True,
+                scope=None,
+                weights_regularizer=None,
+                outputs_collection=None,
+                weights_initializer=initializers.xavier_initializer(),
+                dtype=tf.float32):
+>>>>>>> EvaNet code and models.
   """iTGM inflated 3D convoltuion.
 
   Args:
@@ -159,16 +199,26 @@ def tgm_3d_conv(
   """
 
   with tf.variable_scope(scope, 'Conv3d', [inputs]) as sc:
+<<<<<<< HEAD
     num_filters_in = contrib_slim_utils.last_dimension(
         inputs.get_shape(), min_rank=5)
+=======
+    num_filters_in = utils.last_dimension(inputs.get_shape(), min_rank=5)
+>>>>>>> EvaNet code and models.
     length, kernel_h, kernel_w = n_element_tuple(3, kernel_size)
     stride_d, stride_h, stride_w = n_element_tuple(3, stride)
 
     spatial_weight_shape = [1, kernel_h, kernel_w, num_filters_in, num_outputs]
+<<<<<<< HEAD
     weight_collection = contrib_slim_utils.get_variable_collections(
         None, 'weights')
 
     spatial_kernel = contrib_slim.model_variable(
+=======
+    weight_collection = utils.get_variable_collections(None, 'weights')
+
+    spatial_kernel = slim.model_variable(
+>>>>>>> EvaNet code and models.
         'weights',
         shape=spatial_weight_shape,
         dtype=inputs.dtype.base_dtype,
@@ -184,7 +234,11 @@ def tgm_3d_conv(
       # more/less filters intermediatly.
       c_in = num_filters_in
       c_out = num_outputs
+<<<<<<< HEAD
       mixing_weights = contrib_slim.model_variable(
+=======
+      mixing_weights = slim.model_variable(
+>>>>>>> EvaNet code and models.
           'soft-attn',
           shape=[c_in * c_out, num],
           initializer=tf.initializers.truncated_normal())
@@ -222,6 +276,11 @@ def tgm_3d_conv(
       outputs = normalizer_fn(outputs, **normalizer_params)
     if activation_fn is not None:
       outputs = activation_fn(outputs)
+<<<<<<< HEAD
     return contrib_slim_utils.collect_named_outputs(outputs_collection,
                                                     sc.original_name_scope,
                                                     outputs)
+=======
+    return utils.collect_named_outputs(outputs_collection,
+                                       sc.original_name_scope, outputs)
+>>>>>>> EvaNet code and models.
